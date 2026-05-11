@@ -21,5 +21,15 @@ tvgl <- function(data, lambda = 0, beta = 0, penalty_type = "l1", use_correlatio
     results <- tvgl_R(S, n, lambda = lambda, beta = beta, penalty_type = penalty_type, rho = rho,
                       tol = tol, rtol = rtol, max_iter = max_iterations, verbose = verbose)
   }
+  Theta_ests <- array(dim = c(p, p, n_tp))
+  for (t in 1:n_tp) {
+    for (t in 1:n_tp) {
+      theta_est <- results$Omega_ests[,,t]
+      theta_est[theta_est != 0] <- 1
+      diag(theta_est) <- 0
+      Theta_ests[,,t] <- theta_est
+    }
+  }
+  results$Theta_ests <- Theta_ests
   return(results)
 }
