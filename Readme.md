@@ -1,5 +1,5 @@
 
-# `rTVGL`: Time-varying graphical LASSO for R
+# `rTVGL`: Time-Varying Graphical LASSO for R
 
 This R package implements the time-varying graphical LASSO method
 introduced by Hallac et al. (2017). The ADMM algorithm is adapted from
@@ -44,10 +44,10 @@ Run the TVGLASSO method using the `tvgl` function and $l_1$ penalty over
 the time.
 
 ``` r
-results <- tvgl(sim$datasets[[1]], lambda = 0.3, beta = 0.2, penalty_type = "l1")
+results <- tvgl(sim$datasets[[1]], lambda = 0.25, beta = 0.25, penalty_type = "l1")
 ```
 
-    ## Convergence reached at iteration 33. Elapsed time 1.411 s.
+    ## Convergence reached at iteration 45. Elapsed time 1.966 s.
 
 Calculate and print the confusion matrix for the first timepoint.
 
@@ -56,8 +56,8 @@ Calculate and print the confusion matrix for the first timepoint.
 ```
 
     ##        Estim. P Estim. N
-    ## True P       54       46
-    ## True N        1     4849
+    ## True P       72       28
+    ## True N       10     4840
 
 Calculate and print some performance scores.
 
@@ -65,8 +65,8 @@ Calculate and print some performance scores.
 round(calculate_scores(cm)[, c("MCC", "F1", "TPR", "FDR")], 4)
 ```
 
-    ##      MCC     F1  TPR    FDR
-    ## 1 0.7245 0.6968 0.54 0.0182
+    ##      MCC     F1  TPR   FDR
+    ## 1 0.7914 0.7912 0.72 0.122
 
 Plot the true simulated network and estimated network using the R
 package `igraph`.

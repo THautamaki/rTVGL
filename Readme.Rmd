@@ -6,7 +6,7 @@ output: github_document
 knitr::opts_chunk$set(echo = TRUE, fig.path = "man/figures/README-", out.width = "100%")
 ```
 
-# `rTVGL`: Time-varying graphical LASSO for R
+# `rTVGL`: Time-Varying Graphical LASSO for R
 
 This R package implements the time-varying graphical LASSO method introduced by Hallac et al. (2017). The ADMM algorithm is adapted from the Python package `regain` (Tomasi et al., 2018).
 
@@ -46,7 +46,7 @@ sim <- generate_timeseries_network_data(n = n, p = p, n_timepoints = n_tp, chang
 Run the TVGLASSO method using the `tvgl` function and $l_1$ penalty over the time.
 
 ```{r}
-results <- tvgl(sim$datasets[[1]], lambda = 0.3, beta = 0.2, penalty_type = "l1")
+results <- tvgl(sim$datasets[[1]], lambda = 0.25, beta = 0.25, penalty_type = "l1")
 ```
 
 Calculate and print the confusion matrix for the first timepoint.
