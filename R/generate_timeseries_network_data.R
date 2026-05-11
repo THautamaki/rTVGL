@@ -1,3 +1,44 @@
+#' Time series network data generator
+#' 
+#' This function generates time series network data with a random network structure
+#'
+#' @param n The number of samples per time point. A scalar or a \code{n_timepoints}-long vector.
+#' @param p The number of variables.
+#' @param n_timepoints The number of time points.
+#' @param n_edges The number of edges in the network. The default value is 0 meaning that number
+#'   of edges is set to \code{p}.
+#' @param n_datasets The number of generated datasets, if multiple replicates needed. The default
+#'   value is 1.
+#' @param change_points A vector containing time points where changes happen.
+#' @param n_add_del The number of changing edges in each change point.
+#' @param rho Initial value for the diagonal of the precision matrix.
+#' @param w1 Lower bound for the weights used to determine value of the precision matrix.
+#' @param w2 Upper bound for the weights used to determine value of the precision matrix.
+#' @param smooth_precision If \code{TRUE}, generated precision matrices change smoothly over time.
+#'   If \code{FALSE}, changes happen immediately in the change points. The default value is \code{TRUE}.
+#' @param seed_net Seed for network structure generation.
+#' @param seed_data Seed for datasets generation.
+#'
+#' @return
+#' A list, which contains following objects:
+#' \item{Sigmas}{
+#'    A \code{p} by \code{p} by \code{n_timepoints} array containing simulated covariance matrices.
+#' }
+#' \item{Omegas}{
+#'    A \code{p} by \code{p} by \code{n_timepoints} array containing simulated precision matrices.
+#' }
+#' \item{Thetas}{
+#'    A \code{p} by \code{p} by \code{n_timepoints} array containing simulated adjacency matrices.
+#' }
+#' \item{datasets}{
+#'    An \code{n_datasets}-long list, each containing \code{n_timepoints}-long list, where each
+#'    list item is \code{n} by \code{p} matrix of the simulated data per time point.
+#' }
+#' @export
+#'
+#' @examples
+#' sim <- generate_timeseries_network_data(n = 50, p = 100, n_timepoints = 20,
+#'                                         change_points = c(5, 10, 15), n_add_del = 10)
 generate_timeseries_network_data <- function(n = 100, p = 100, n_timepoints = 10, n_edges = 0,
                                              n_datasets = 1, change_points = c(5), n_add_del = 5,
                                              rho = 0.25, w1 = 0.1, w2 = 0.3, smooth_precision = TRUE,
