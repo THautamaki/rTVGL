@@ -5,6 +5,9 @@ This R package implements the time-varying graphical LASSO method
 introduced by Hallac et al. (2017). The ADMM algorithm is adapted from
 the Python package `regain` (Tomasi et al., 2018).
 
+The package is a work in progress, and all documentation will be added
+in the future.
+
 ## Installation
 
 The `rTVGL` package can be installed using the following code:
@@ -47,7 +50,7 @@ the time.
 results <- tvgl(sim$datasets[[1]], lambda = 0.25, beta = 0.25, penalty_type = "l1")
 ```
 
-    ## Convergence reached at iteration 45. Elapsed time 1.966 s.
+    ## Convergence reached at iteration 45. Elapsed time 1.953 s.
 
 Calculate and print the confusion matrix for the first timepoint.
 
