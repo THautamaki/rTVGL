@@ -8,7 +8,7 @@ Maintainer: Tuomas Hautamaki <tuomas.hautamaki@oulu.fi>
 Description: This R package implements the time-varying graphical LASSO method introduced by Hallac et al. (2017).
 License: GPL (>= 3)
 Encoding: UTF-8
-Imports: Rcpp (>= 1.1.1)
+Imports: Rcpp
 LinkingTo: Rcpp, RcppArmadillo
 URL: https://github.com/THautamaki/rTVGL
 BugReports: https://github.com/THautamaki/rTVGL/issues
