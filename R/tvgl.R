@@ -55,7 +55,10 @@
 tvgl <- function(data, lambda = 0, beta = 0, penalty_type = "l1", use_correlation = TRUE, rho = 1,
                  tol = 1e-4, rtol = 1e-4, max_iterations = 1000, use_Cpp = TRUE, verbose = 0) {
   # If dataset is in array format, convert to the list.
-  if (is.array(data)) data <- lapply(1:n_tp, function(t) data[,,t])
+  if (is.array(data)) {
+    n_tp <- dim(data)[3]
+    data <- sapply(1:n_tp, function(t) data[,,t])
+  }
   n <- sapply(data, nrow)
   # The number of time points.
   n_tp <- length(data)
