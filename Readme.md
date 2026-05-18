@@ -35,7 +35,12 @@ number_add_del <- 10  # Number of edges been deleted and added in the change poi
 ```
 
 Generate simulated data using the `generate_timeseries_network_data`
-function.
+function. We use the R package `MASS` to generate multivariate normally
+distributed samples, which uses the eigen decomposition in its
+generation mechanism. We noticed that different basic linear algebra
+subprograms (BLAS), such as OpenBLAS, handle the signs of eigenvectors
+differently. Thus, the generated samples come from the same
+distribution, but the values differ even when the same seeds are used.
 
 ``` r
 sim <- generate_timeseries_network_data(n = n, p = p, n_timepoints = n_tp, change_points = cps,
@@ -50,7 +55,7 @@ the time.
 results <- tvgl(sim$datasets[[1]], lambda = 0.25, beta = 0.25, penalty_type = "l1")
 ```
 
-    ## Convergence reached at iteration 45. Elapsed time 1.978 s.
+    ## Convergence reached at iteration 45. Elapsed time 1.949 s.
 
 Calculate and print the confusion matrix for the first time point.
 
@@ -104,7 +109,7 @@ Generate graph objects using `graph_from_adjacency_matrix` function from
 ``` r
 true_network_1 <- graph_from_adjacency_matrix(sim$Thetas[,,1], mode = "undirected", diag = F)
 true_network_13 <- graph_from_adjacency_matrix(sim$Thetas[,,13], mode = "undirected", diag = F)
-est_network_1 <- graph_from_adjacency_matrix(results$Theta_ests[,,13], mode = "undirected", diag = F)
+est_network_1 <- graph_from_adjacency_matrix(results$Theta_ests[,,1], mode = "undirected", diag = F)
 est_network_13 <- graph_from_adjacency_matrix(results$Theta_ests[,,13], mode = "undirected", diag = F)
 ```
 
@@ -124,7 +129,7 @@ plot(true_network_1, layout = coords, edge.width = 2, vertex.size = 4, vertex.la
      main = "True network, 1st time point")
 plot(true_network_13, layout = coords, edge.width = 2, vertex.size = 4, vertex.label = NA,
      main = "True network, 13th time point")
-plot(est_network_13, layout = coords, edge.width = 2, vertex.size = 4, vertex.label = NA,
+plot(est_network_1, layout = coords, edge.width = 2, vertex.size = 4, vertex.label = NA,
      main = "Estimated network, 1st time point")
 plot(est_network_13, layout = coords, edge.width = 2, vertex.size = 4, vertex.label = NA,
      main = "Estimated network, 13th time point")
